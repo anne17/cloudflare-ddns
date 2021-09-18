@@ -1,0 +1,27 @@
+{
+    "API_TOKEN": "[API token with permissions Zone.Zone and Zone.DNS for all records]",
+    "ZONES": [
+        {
+            "ZONE_ID": "[ID for zone 1]",
+            "RECORDS": [
+                {
+                    "name": "[url 1]",
+                    "id": "[ID for record 1]"
+                },
+                {
+                    "name": "[url 2]",
+                    "id": "[ID for record 2]"
+                }
+            ]
+        },
+        {
+            "ZONE_ID": "[ID for zone 2]",
+            "RECORDS": [
+                {
+                    "name": "[url 1]",
+                    "id": "[ID for record 1]"
+                }
+            ]
+        }
+    ]
+}
