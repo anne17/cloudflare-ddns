@@ -86,8 +86,7 @@ def do_ddns():
         except requests.exceptions.ConnectionError:
             time.sleep(10)
     else:
-        print("Failed to retrieve IP address from '%s'!" % IP_URL)
-        raise
+        raise Exception("Failed to retrieve IP address from '%s'. Tried 5 times and gave up." % IP_URL)
 
 
 if __name__ == "__main__":
