@@ -9,7 +9,7 @@ import requests
 
 CONFIG = "config.json"
 IP_FILE = "public_ip"
-IP_URL = "http://ip.42.pl/raw"
+IP_URL = "https://myexternalip.com/raw"
 
 
 def get_ip():
@@ -77,7 +77,10 @@ def do_ddns():
     for _x in range(5):
         try:
             current_ip = get_ip()
-            if current_ip != get_old_ip():
+            if not current_ip:
+                time.sleep(10)
+                continue
+            elif current_ip != get_old_ip():
                 print("The IP address has changed! New IP: %s\n" % current_ip)
                 save_new_ip(current_ip)
                 myconfig = read_config()
@@ -86,7 +89,7 @@ def do_ddns():
         except requests.exceptions.ConnectionError:
             time.sleep(10)
     else:
-        raise Exception("Failed to retrieve IP address from '%s'. Tried 5 times and gave up." % IP_URL)
+        print("Error: Failed to retrieve IP address from '%s'. Tried 5 times and gave up." % IP_URL)
 
 
 if __name__ == "__main__":
