@@ -1,11 +1,11 @@
 """Script for updating the IP address on Cloudflare if it has changed."""
 
+import ipaddress
 import json
 import time
 from pathlib import Path
 
 import requests
-
 
 CONFIG = "config.json"
 IP_FILE = "public_ip"
@@ -15,7 +15,11 @@ IP_URL = "https://myexternalip.com/raw"
 def get_ip():
     """Get public IP adrdess in raw format from IP_URL."""
     response = requests.get(IP_URL)
-    return str(response.text)
+    try:
+        ipaddress.IPv4Address(response.text)
+        return str(response.text)
+    except ipaddress.AddressValueError:
+        return None
 
 
 def get_old_ip():
